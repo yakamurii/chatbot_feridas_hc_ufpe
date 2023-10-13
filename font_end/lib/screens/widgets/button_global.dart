@@ -2,7 +2,8 @@ import 'package:chatbot_feridas/utils/global_colors.dart';
 import 'package:flutter/material.dart';
 
 class ButtonGlobal extends StatelessWidget {
-  const ButtonGlobal({super.key});
+  const ButtonGlobal({super.key, required this.text});
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class ButtonGlobal extends StatelessWidget {
           ],
         ),
         child: Text(
-          'Login',
+          text,
           style: TextStyle(
             color: GlobalColors.textWhiteColor,
             fontWeight: FontWeight.w600,

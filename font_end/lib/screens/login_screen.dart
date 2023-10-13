@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                     obscure: true
                     ),
                   const SizedBox(height:10 ,),
-                  const ButtonGlobal(),
+                  const ButtonGlobal(text: 'Login',),
                   const SizedBox(height:25 ,),
                   const SocialLogin(),
                 ],

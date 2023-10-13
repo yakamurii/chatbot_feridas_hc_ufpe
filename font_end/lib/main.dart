@@ -1,4 +1,5 @@
 import 'package:chatbot_feridas/screens/login_screen.dart';
+import 'package:chatbot_feridas/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false, 
       home: LoginScreen()
+      //home: RegisterScreen()
     );
   }
 }
