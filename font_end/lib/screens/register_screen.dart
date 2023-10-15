@@ -1,3 +1,4 @@
+import 'package:chatbot_feridas/screens/login_screen.dart';
 import 'package:chatbot_feridas/screens/widgets/button_global.dart';
 import 'package:chatbot_feridas/screens/widgets/social_login.dart';
 import 'package:chatbot_feridas/screens/widgets/text_form_global.dart';
@@ -107,6 +108,12 @@ class RegisterScreen extends StatelessWidget {
               'Já está cadastrado?'
               ),
             InkWell(
+               onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                );
+              },
               child: Text(
                 'Clique aqui',
                 style: TextStyle(

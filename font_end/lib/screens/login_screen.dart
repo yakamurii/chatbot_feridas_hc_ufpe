@@ -1,3 +1,4 @@
+import 'package:chatbot_feridas/screens/register_screen.dart';
 import 'package:chatbot_feridas/screens/widgets/button_global.dart';
 import 'package:chatbot_feridas/screens/widgets/social_login.dart';
 import 'package:chatbot_feridas/screens/widgets/text_form_global.dart';
@@ -26,13 +27,15 @@ class LoginScreen extends StatelessWidget {
                   child: Image.asset('assets/images/hc_ebserh.png'),
                 ),
                 const SizedBox(height: 50,),
-                  Text(
-                    'Acesse sua conta',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: GlobalColors.textBlackColor,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500
+                  Center(
+                    child: Text(
+                      'Acesse a sua conta',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: GlobalColors.textBlackColor,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500
+                      ),
                     ),
                   ), 
                 const SizedBox(height: 15,), 
@@ -71,6 +74,12 @@ class LoginScreen extends StatelessWidget {
               'Ainda não se cadastrou?'
               ),
             InkWell(
+               onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RegisterScreen()),
+                );
+              },
               child: Text(
                 'Clique aqui',
                 style: TextStyle(
@@ -83,5 +92,4 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-
 }
