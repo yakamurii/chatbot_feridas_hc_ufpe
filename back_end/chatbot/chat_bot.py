@@ -20,7 +20,7 @@ pairs = [
     (r'sinto dor', ['Vê sinal de pus ou pontos esbranquiçados?']),
     (r'não sinto dor', ['Que ótima notícia. Posso te ajudar em algo mais?']),
     (r'pus| pontos esbranquiçados', ['Você deve procurar imediatiamente o hospital!']),
-    (r'não tem pus| não tem pontos esbranquiçados', ['Você deve procurar imediatiamente o hospital!']),
+    (r'não tem pus| não tem pontos esbranquiçados', ['Este é um ótimo indicativo!']),
     (r'aberta', ['Vê sinal de pus ou pontos esbranquiçados?']),
 
     (r'adeus|tchau', ['Tchau! Até logo.', 'Até mais!']),
@@ -37,4 +37,4 @@ while True:
     else:
         response = chatbot.respond(user_input)
         print("ChatBot: " + response)
-
+        
