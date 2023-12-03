@@ -31,15 +31,17 @@ class RegisterScreen extends StatelessWidget {
                   child: Image.asset('assets/images/hc_ebserh.png'),
                 ),
                 const SizedBox(height: 50,),
-                  Text(
-                    'Acesse sua conta',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: GlobalColors.textBlackColor,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500
+                   Center(
+                    child: Text(
+                      'Acesse a sua conta',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: GlobalColors.textBlackColor,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500
+                      ),
                     ),
-                  ), 
+                  ),
                 const SizedBox(height: 15,), 
                 //Name Input
                  TextFormGlobal(

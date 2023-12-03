@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Image.asset('assets/images/hc_ebserh.png'),
                 ),
-                const SizedBox(height: 50,),
+                const SizedBox(height: 80,),
                   Center(
                     child: Text(
                       'Acesse a sua conta',
@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ), 
-                const SizedBox(height: 15,), 
+                const SizedBox(height: 25,), 
                 /// Email Input
                 TextFormGlobal(
                   controller: emailController,
@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                   obscure: false, 
                   textInputType: TextInputType.emailAddress,
                   ),  
-                  const SizedBox(height: 10,),
+                  const SizedBox(height: 25,),
                   //Password Input
                   TextFormGlobal(
                     controller: passwordController, 
@@ -55,9 +55,11 @@ class LoginScreen extends StatelessWidget {
                     obscure: true
                     ),
                   const SizedBox(height:10 ,),
+                  const SizedBox(height:35 ,),
                   const ButtonGlobal(text: 'Login',),
-                  const SizedBox(height:25 ,),
+                  const SizedBox(height:50 ,),
                   const SocialLogin(),
+                  const SizedBox(height:25 ,),
                 ],
               ),
           ),

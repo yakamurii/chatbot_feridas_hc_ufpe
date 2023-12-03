@@ -1,4 +1,4 @@
-import 'package:chatbot_feridas/screens/chatbot_screen.dart';
+import 'package:chatbot_feridas/screens/message_screen/chatbot_screen.dart';
 import 'package:chatbot_feridas/utils/global_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -12,14 +12,14 @@ class ButtonGlobal extends StatelessWidget {
        onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ChatbotScreen()),
+            MaterialPageRoute(builder: (context) => const ChatbotScreen()),
           );
         },
       child: Container(
         alignment: Alignment.center,
         height: 55,
         decoration: BoxDecoration(
-          color: GlobalColors.buttonColor,
+          color: GlobalColors.mainColor,
           borderRadius: BorderRadius.circular(6),
           boxShadow: [
             BoxShadow(
