@@ -41,3 +41,4 @@ def processar_respostas(respostas):
 
     return sintomas
 
+
