@@ -4,22 +4,19 @@ app = Flask(__name__)
 
 data = {"isImportant": "true", "pergunta": "Como passou a noite?"},
 
-
 @app.route('/chat', methods=['GET'])
 def get_data():
-    # question = {}
-    # inputget = str(request.args['isImportant'])
-    # question['isImportant'] = inputget
-    # return question
     response = jsonify(data)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 @app.route('/chat', methods=['POST'])
 def add_data():
-    new_entry = {'isImportant': request.json['pergunta']}
-    data.append(new_entry)
-    response = jsonify(new_entry)
+    global data  
+
+    new_entry = {'isImportant': request.json.get('isImportant', ''), 'pergunta': request.json.get('pergunta', '')}
+    data[0].update(new_entry)  
+    response = jsonify(data[0])
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response, 201
 

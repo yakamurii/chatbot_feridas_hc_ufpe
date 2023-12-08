@@ -23,7 +23,6 @@ class Body extends StatelessWidget {
       if (decodedResponse is List && decodedResponse.isNotEmpty) {
         final firstObject = decodedResponse[0];
         if (firstObject.containsKey('isImportant') && firstObject.containsKey('pergunta')) {
-          // Monta a string no formato desejado manualmente
           final jsonString = '{"isImportant": ${firstObject['isImportant']}, "pergunta": "${firstObject['pergunta']}"}';
           return jsonString;
         }

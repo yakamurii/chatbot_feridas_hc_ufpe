@@ -1,6 +1,8 @@
 import 'package:chatbot_feridas/utils/global_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+
 class ChatInputField extends StatelessWidget {
   const ChatInputField({
     super.key,
@@ -63,5 +65,5 @@ class ChatInputField extends StatelessWidget {
     );
   }
   
-  void setState(Null Function() param0) {}
+  
 }
