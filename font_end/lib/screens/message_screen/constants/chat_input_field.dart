@@ -1,5 +1,6 @@
 import 'package:chatbot_feridas/utils/global_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 class ChatInputField extends StatelessWidget {
   const ChatInputField({
     super.key,
@@ -7,6 +8,8 @@ class ChatInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    
     return Container(
       padding: 
       const EdgeInsets.symmetric(
@@ -40,12 +43,15 @@ class ChatInputField extends StatelessWidget {
                   ),
                   child: const Row(children: [  
                     SizedBox(width: 10,),
-                    Expanded(child: TextField(
-                      decoration: InputDecoration(
-                        hintText: "Escreva sua mensagem",
-                        border:  InputBorder.none,
+                    Expanded(child:
+                     TextField(
+                        decoration: InputDecoration(
+                          hintText: "Escreva sua mensagem",
+                          border: InputBorder.none,
                         ),
-                    ))
+                        
+                      ),
+                    ),
                   ],
                   ),
                 ),
@@ -56,4 +62,6 @@ class ChatInputField extends StatelessWidget {
           ),
     );
   }
+  
+  void setState(Null Function() param0) {}
 }

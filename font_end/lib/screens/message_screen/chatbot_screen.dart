@@ -2,15 +2,18 @@ import 'package:chatbot_feridas/screens/login_screen.dart';
 import 'package:chatbot_feridas/screens/message_screen/constants/body.dart';
 import 'package:chatbot_feridas/utils/global_colors.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class ChatbotScreen extends StatelessWidget {
   const ChatbotScreen({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: newMethod(),
       body: Body(),
+      
     );
      
    }
@@ -41,3 +44,4 @@ class ChatbotScreen extends StatelessWidget {
     );
   }
 }
+

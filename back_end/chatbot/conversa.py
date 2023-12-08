@@ -1,5 +1,3 @@
-
-
 from processar_texto import processar_respostas
 
 
