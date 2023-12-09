@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-data = {"isImportant": "true", "pergunta": "Como passou a noite?"},
+data = {"isImportant": "false", "pergunta": "Como passou a noite?"},
 
 @app.route('/chat', methods=['GET'])
 def get_data():

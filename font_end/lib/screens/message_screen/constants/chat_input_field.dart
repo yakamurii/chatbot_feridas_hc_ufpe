@@ -5,9 +5,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ChatInputField extends StatelessWidget {
-  const ChatInputField({
-    super.key,
-  });
+  final Function(String) sendMessageTo;
+  
+
+
+  const ChatInputField({Key? key, required this.sendMessageTo}) : super(key: key);
 
 void sendMessage(String message) async {
   final apiUrl = 'http://10.0.2.2:5000/chat'; 
@@ -29,7 +31,7 @@ void sendMessage(String message) async {
 }
 
 
-  @override
+   @override
   Widget build(BuildContext context) {
     TextEditingController messageController = TextEditingController();
 
