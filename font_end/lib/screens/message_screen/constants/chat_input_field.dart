@@ -11,24 +11,24 @@ class ChatInputField extends StatelessWidget {
 
   const ChatInputField({Key? key, required this.sendMessageTo}) : super(key: key);
 
-void sendMessage(String message) async {
-  final apiUrl = 'http://10.0.2.2:5000/chat'; 
-  final body = {'isImportant': 'true', 'pergunta': message};
+ void sendMessage(String message) async {
+    final apiUrl = 'http://10.0.2.2:5000/chat'; 
+    final body = {'isImportant': 'true', 'pergunta': message};
 
-  final response = await http.post(
-    Uri.parse(apiUrl),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: jsonEncode(body),
-  );
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(body),
+    );
 
-  if (response.statusCode == 201) {
-    print('Mensagem enviada com sucesso!');
-  } else {
-    print('Erro ao enviar mensagem - ${response.statusCode}');
+    if (response.statusCode == 201) {
+      print('Mensagem enviada com sucesso!');
+    } else {
+      print('Erro ao enviar mensagem - ${response.statusCode}');
+    }
   }
-}
 
 
    @override
@@ -74,13 +74,13 @@ void sendMessage(String message) async {
                 ),
               ),
             ),
-            IconButton(
-              icon: Icon(Icons.send, color: Colors.blue, size: 40.0),
-              onPressed: () {
-                sendMessage(messageController.text);
-                messageController.clear();
-              },
-            ),
+               IconButton(
+        icon: Icon(Icons.send, color: Colors.blue, size: 40.0),
+        onPressed: () {
+          sendMessageTo(messageController.text); // Chama a função passada por parâmetro
+          messageController.clear();
+        },
+      )
           ],
         ),
       ),

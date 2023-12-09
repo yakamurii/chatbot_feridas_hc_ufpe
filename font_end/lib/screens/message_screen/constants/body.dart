@@ -18,6 +18,7 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+
   List<String> messages = [];
 
   Future<void> fetchData() async {
@@ -29,9 +30,13 @@ class _BodyState extends State<Body> {
       if (firstObject.containsKey('isImportant') && firstObject.containsKey('pergunta')) {
         final jsonString =
             '{"isImportant": ${firstObject['isImportant']}, "pergunta": "${firstObject['pergunta']}"}';
-        setState(() {
-          messages.insert(0, jsonString);
-        });
+        
+        // Verifica se a mensagem já existe na lista
+        if (!messages.contains(jsonString)) {
+          setState(() {
+            messages.insert(0, jsonString);
+          });
+        }
       }
     }
   }
