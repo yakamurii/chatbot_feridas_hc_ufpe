@@ -78,9 +78,10 @@ class _BodyState extends State<Body> {
       children: [
         Expanded(
           child: ListView.builder(
-            itemCount: messages.length,
-            itemBuilder: (context, index) {
-              final decodedData = jsonDecode(messages[index]);
+  itemCount: messages.length,
+  itemBuilder: (context, index) {
+    final reversedIndex = messages.length - 1 - index;
+    final decodedData = jsonDecode(messages[reversedIndex]);
               bool isImportant = decodedData['isImportant'] ?? false;
               String messageText = decodedData['pergunta'] ?? '';
 
