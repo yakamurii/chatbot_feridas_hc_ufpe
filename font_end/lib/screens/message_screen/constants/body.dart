@@ -19,7 +19,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   List<ChatMessage> messages = [];
 
-     @override
+  @override
   void initState() {
     super.initState();
     fetchData(); // Chama o método fetchData para obter a primeira mensagem
@@ -30,7 +30,9 @@ class _BodyState extends State<Body> {
       final response = await http.get(Uri.parse(widget.apiUrl));
       final decodedResponse = jsonDecode(response.body);
 
-      if (decodedResponse is Map && decodedResponse.containsKey('isSender') && decodedResponse.containsKey('mensagem')) {
+      if (decodedResponse is Map &&
+          decodedResponse.containsKey('isSender') &&
+          decodedResponse.containsKey('mensagem')) {
         final chatMessage = ChatMessage(
           message: decodedResponse['mensagem'],
           isSender: decodedResponse['isSender'],
@@ -82,30 +84,36 @@ class _BodyState extends State<Body> {
       children: [
         Expanded(
           child: ListView.builder(
-            reverse: true, 
+            reverse: true,
             itemCount: messages.length,
             itemBuilder: (context, index) {
               final chatMessage = messages[index];
 
               return Row(
-                mainAxisAlignment: chatMessage.isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
+                mainAxisAlignment: chatMessage.isSender
+                    ? MainAxisAlignment.end
+                    : MainAxisAlignment.start,
                 children: [
                   if (!chatMessage.isSender)
                     CircleAvatar(
                       radius: 30,
-                      backgroundImage: AssetImage("assets/images/assistente-de-robo.png"),
+                      backgroundImage:
+                          AssetImage("assets/images/assistente-de-robo.png"),
                     ),
                   Container(
                     margin: EdgeInsets.only(top: 30),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                     decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(chatMessage.isSender ? 1 : 0.5),
+                      color: Colors.blue
+                          .withOpacity(chatMessage.isSender ? 1 : 0.5),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
                       chatMessage.message,
                       style: TextStyle(
-                        color: chatMessage.isSender ? Colors.white : Colors.black,
+                        color:
+                            chatMessage.isSender ? Colors.white : Colors.black,
                         fontSize: 17,
                       ),
                     ),
