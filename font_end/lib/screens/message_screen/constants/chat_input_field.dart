@@ -13,7 +13,7 @@ class ChatInputField extends StatelessWidget {
 
  void sendMessage(String message) async {
     final apiUrl = 'http://10.0.2.2:5000/chat'; 
-    final body = {'isImportant': 'true', 'pergunta': message};
+    final body = {'isSender': 'true', 'mensagem': message};
 
     final response = await http.post(
       Uri.parse(apiUrl),
@@ -74,13 +74,18 @@ class ChatInputField extends StatelessWidget {
                 ),
               ),
             ),
-               IconButton(
-        icon: Icon(Icons.send, color: Colors.blue, size: 40.0),
-        onPressed: () {
-          sendMessageTo(messageController.text); // Chama a função passada por parâmetro
-          messageController.clear();
-        },
-      )
+             IconButton(
+  icon: Icon(Icons.send, color: Colors.blue, size: 40.0),
+  onPressed: () {
+    if (messageController.text.isNotEmpty) {
+      sendMessageTo(messageController.text);
+      messageController.clear();
+    } else {
+      // Adicione aqui o tratamento para caso o campo de mensagem esteja vazio
+    }
+  },
+)
+
           ],
         ),
       ),

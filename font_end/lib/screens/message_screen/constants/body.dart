@@ -16,79 +16,81 @@ class Body extends StatefulWidget {
   @override
   _BodyState createState() => _BodyState();
 }
-
 class _BodyState extends State<Body> {
+  List<ChatMessage> messages = [];
 
-  List<String> messages = [];
+     @override
+  void initState() {
+    super.initState();
+    fetchData(); // Chama o método fetchData para obter a primeira mensagem
+  }
 
   Future<void> fetchData() async {
-    final response = await http.get(Uri.parse(widget.apiUrl));
-    final decodedResponse = jsonDecode(response.body);
+    try {
+      final response = await http.get(Uri.parse(widget.apiUrl));
+      final decodedResponse = jsonDecode(response.body);
 
-    if (decodedResponse is List && decodedResponse.isNotEmpty) {
-      final firstObject = decodedResponse[0];
-      if (firstObject.containsKey('isImportant') && firstObject.containsKey('pergunta')) {
-        final jsonString =
-            '{"isImportant": ${firstObject['isImportant']}, "pergunta": "${firstObject['pergunta']}"}';
-        
-        // Verifica se a mensagem já existe na lista
-        if (!messages.contains(jsonString)) {
-          setState(() {
-            messages.insert(0, jsonString);
-          });
-        }
+      if (decodedResponse is Map && decodedResponse.containsKey('isSender') && decodedResponse.containsKey('mensagem')) {
+        final chatMessage = ChatMessage(
+          message: decodedResponse['mensagem'],
+          isSender: decodedResponse['isSender'],
+        );
+        setState(() {
+          messages.add(chatMessage);
+        });
       }
+    } catch (e) {
+      print('Erro ao carregar a mensagem: $e');
+      // Lidere com o erro de acordo com a lógica do seu aplicativo
     }
   }
+
 
   void sendMessage(String message) async {
     final apiUrl = 'http://10.0.2.2:5000/chat';
-    final body = {'isImportant': 'true', 'pergunta': message};
+    final body = {'isSender': 'true', 'mensagem': message};
 
     final response = await http.post(
       Uri.parse(apiUrl),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: {'Content-Type': 'application/json'},
       body: jsonEncode(body),
     );
 
-    if (response.statusCode == 201) {
-      print('Mensagem enviada com sucesso!');
+    if (response.statusCode == 200) {
+      final decodedResponse = jsonDecode(response.body);
+      final mensagem = decodedResponse["mensagem"];
+      final status = decodedResponse["isSender"];
+
+      final chatMessage = ChatMessage(message: mensagem, isSender: status);
+
+      setState(() {
+        messages.insert(0, chatMessage);
+      });
+
+      if (status == "Fim da conversa") {
+
+      }
     } else {
       print('Erro ao enviar mensagem - ${response.statusCode}');
+
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    fetchDataPeriodically();
-  }
-
-  void fetchDataPeriodically() {
-    Timer.periodic(Duration(seconds: 10), (timer) {
-      fetchData();
-    });
-  }
-
-  @override
+ @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
           child: ListView.builder(
-  itemCount: messages.length,
-  itemBuilder: (context, index) {
-    final reversedIndex = messages.length - 1 - index;
-    final decodedData = jsonDecode(messages[reversedIndex]);
-              bool isImportant = decodedData['isImportant'] ?? false;
-              String messageText = decodedData['pergunta'] ?? '';
+            reverse: true, 
+            itemCount: messages.length,
+            itemBuilder: (context, index) {
+              final chatMessage = messages[index];
 
               return Row(
-                mainAxisAlignment: isImportant ? MainAxisAlignment.end : MainAxisAlignment.start,
+                mainAxisAlignment: chatMessage.isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
                 children: [
-                  if (!isImportant)
+                  if (!chatMessage.isSender)
                     CircleAvatar(
                       radius: 30,
                       backgroundImage: AssetImage("assets/images/assistente-de-robo.png"),
@@ -97,13 +99,13 @@ class _BodyState extends State<Body> {
                     margin: EdgeInsets.only(top: 30),
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                     decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(isImportant ? 1 : 0.5),
+                      color: Colors.blue.withOpacity(chatMessage.isSender ? 1 : 0.5),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
-                      messageText,
+                      chatMessage.message,
                       style: TextStyle(
-                        color: isImportant ? Colors.white : Colors.black,
+                        color: chatMessage.isSender ? Colors.white : Colors.black,
                         fontSize: 17,
                       ),
                     ),
@@ -142,7 +144,10 @@ class TextMessage extends StatelessWidget {
       style: TextStyle(color: isSender ? GlobalColors.textWhiteColor : GlobalColors.textBlackColor,
       fontSize: 17
       ),
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
       )
       );
   }
 }
+
